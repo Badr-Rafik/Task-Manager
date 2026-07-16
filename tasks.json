@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "title": "wake up",
+        "completed": true
+    },
+    {
+        "id": 2,
+        "title": "go to the gym",
+        "completed": false
+    },
+    {
+        "id": 3,
+        "title": "finish work",
+        "completed": false
+    }
+]
