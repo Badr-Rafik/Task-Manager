@@ -1,7 +1,7 @@
 import json
 
 
-def load_tasks():
+def LoadTasks():
     try:
         with open("tasks.json", "r") as file:
             return json.load(file)
@@ -9,12 +9,12 @@ def load_tasks():
         return []
 
 
-def save_tasks(tasks):
+def SaveTasks(tasks):
     with open("tasks.json", "w") as file:
         json.dump(tasks, file, indent=4)
 
 
-def add_task(tasks):
+def AddTask(tasks):
     title = input("Enter task title: ").strip()
     if not title:
         print("Task title cannot be empty.")
@@ -30,11 +30,11 @@ def add_task(tasks):
     }
 
     tasks.append(new_task)
-    save_tasks(tasks)
+    SaveTasks(tasks)
     return tasks
 
 
-def update_task(tasks):
+def UpdateTask(tasks):
     if not tasks:
         print("No tasks to update.")
         return tasks
@@ -53,7 +53,7 @@ def update_task(tasks):
                 print("Task title cannot be empty.")
                 return tasks
             task["title"] = new_title
-            save_tasks(tasks)
+            SaveTasks(tasks)
             print("Task updated.")
             return tasks
 
@@ -61,7 +61,7 @@ def update_task(tasks):
     return tasks
 
 
-def delete_task(tasks):
+def DeleteTask(tasks):
     if not tasks:
         print("No tasks to delete.")
         return tasks
@@ -76,7 +76,7 @@ def delete_task(tasks):
     for index, task in enumerate(tasks):
         if task.get("id") == target_id:
             del tasks[index]
-            save_tasks(tasks)
+            SaveTasks(tasks)
             print("Task deleted.")
             return tasks
 
@@ -84,7 +84,7 @@ def delete_task(tasks):
     return tasks
 
 
-def mark_task_completed(tasks):
+def MarkTaskCompleted(tasks):
     if not tasks:
         print("No tasks to mark as completed.")
         return tasks
@@ -99,7 +99,7 @@ def mark_task_completed(tasks):
     for task in tasks:
         if task.get("id") == target_id:
             task["completed"] = True
-            save_tasks(tasks)
+            SaveTasks(tasks)
             print("Task marked as completed.")
             return tasks
 
@@ -107,7 +107,7 @@ def mark_task_completed(tasks):
     return tasks
 
 
-tasks = load_tasks()
+tasks = LoadTasks()
 
 while True:
     print("\nTask Manager Menu")
@@ -127,7 +127,7 @@ while True:
         continue
 
     if choice == 1:
-        tasks = add_task(tasks)
+        tasks = AddTask(tasks)
     elif choice == 2:
         if tasks:
             print("Your tasks:")
@@ -137,11 +137,11 @@ while True:
         else:
             print("No tasks yet.")
     elif choice == 3:
-        tasks = update_task(tasks)
+        tasks = UpdateTask(tasks)
     elif choice == 4:
-        tasks = delete_task(tasks)
+        tasks = DeleteTask(tasks)
     elif choice == 5:
-        tasks = mark_task_completed(tasks)
+        tasks = MarkTaskCompleted(tasks)
     elif choice == 6:
         print("Exiting Task Manager...")
         break
